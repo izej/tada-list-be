@@ -1,0 +1,19 @@
+version: "1.0"
+
+name: tada-list
+
+services:
+
+  postgres:
+    container_name: tada-list-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: tada_list_db
+
+networks:
+  tada-list-network:
+    driver: bridge

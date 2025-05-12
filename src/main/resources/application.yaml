@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: tada-list-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tada_list_db
+    username: root
+    password: root
+
+security:
+  jwt:
+    secret: 4ng6qpjh0crvhqbi5so2epczmevgaidp
+    expiration: 1800000
