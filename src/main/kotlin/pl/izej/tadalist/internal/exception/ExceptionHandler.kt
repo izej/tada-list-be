@@ -1,11 +1,11 @@
 package pl.izej.tadalist.internal.exception
 
-import io.github.oshai.kotlinlogging.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
+import pl.izej.tadalist.internal.logging.KLogging
 import kotlin.also
 import kotlin.jvm.javaClass
 import kotlin.stackTraceToString

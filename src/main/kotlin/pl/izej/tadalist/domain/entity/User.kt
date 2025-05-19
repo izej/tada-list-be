@@ -1,11 +1,6 @@
 package pl.izej.tadalist.domain.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
@@ -13,12 +8,21 @@ import java.util.UUID
 data class User(
 
     @Id
-    @Column(nullable = false) var id: UUID = UUID.randomUUID(),
+    @Column(nullable = false)
+    var id: UUID = UUID.randomUUID(),
 
-    @Enumerated(EnumType.STRING) @Column(nullable = true) var role: UserRole,
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var role: UserRole = UserRole.USER,
 
-    @Column(nullable = false) var email: String,
-    @Column(nullable = false) var password: String,
+    @Column(nullable = false, unique = true)
+    var email: String,
+
+    @Column(nullable = false)
+    var password: String,
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    var tasks: MutableList<Task> = mutableListOf()
 )
 
 enum class UserRole {
