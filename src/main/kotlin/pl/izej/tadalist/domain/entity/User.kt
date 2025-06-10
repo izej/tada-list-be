@@ -22,7 +22,10 @@ data class User(
     var password: String,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
-    var tasks: MutableList<Task> = mutableListOf()
+    var tasks: MutableList<Task> = mutableListOf(),
+
+    @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    var profile: Profile? = null
 )
 
 enum class UserRole {
