@@ -19,7 +19,7 @@ class ProfileService(private val profileRepository: ProfileRepository, private v
         val user = userRepository.findById(userId)
             .orElseThrow { NoSuchElementException("User with id $userId not found") }
 
-        val profile = profileRepository.findByUser(user).orElseGet {
+        val profile = profileRepository.findByUserId(user.id).orElseGet {
             Profile(user = user)
         }
 

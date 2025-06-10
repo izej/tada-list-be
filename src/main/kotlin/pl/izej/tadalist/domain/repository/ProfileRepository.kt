@@ -9,7 +9,5 @@ import java.util.UUID
 
 @Repository
 interface ProfileRepository: CrudRepository<Profile, UUID>  {
-    fun findByUser(user: User): Optional<Profile>
-
     fun findByUserId(userId: UUID): Optional<Profile>
 }
