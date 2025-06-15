@@ -16,5 +16,9 @@ data class Task(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    var user: User
+    var user: User,
+
+    @ManyToOne
+    @JoinColumn(name = "profile_id", nullable = false)
+    val profile: Profile
 )

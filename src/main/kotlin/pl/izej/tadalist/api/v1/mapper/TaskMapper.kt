@@ -19,5 +19,6 @@ fun TaskDto.toTask(user: User): Task = Task(
     text = text,
     done = done ?: false,
     date = date ?: LocalDateTime.now().toISOString(),
-    user = user
+    user = user,
+    profile = user.profile!!
 )

@@ -7,3 +7,6 @@ CREATE TABLE profile (
 
                          CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+
+ALTER TABLE tasks
+    ADD CONSTRAINT fk_profile FOREIGN KEY (profile_id) REFERENCES profile (id) ON DELETE CASCADE;
