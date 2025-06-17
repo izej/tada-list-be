@@ -1,5 +1,6 @@
 package pl.izej.tadalist.service
 
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import pl.izej.tadalist.api.v1.dto.AchievementDto
 import pl.izej.tadalist.domain.entity.ProfileAchievement
@@ -8,6 +9,7 @@ import pl.izej.tadalist.domain.repository.AchievementRepository
 import pl.izej.tadalist.domain.repository.ProfileRepository
 import pl.izej.tadalist.domain.repository.TaskRepository
 import pl.izej.tadalist.domain.repository.UserAchievementRepository
+import pl.izej.tadalist.event.AchievementUnlockedEvent
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
@@ -18,6 +20,7 @@ class AchievementService(
     private val achievementRepository: AchievementRepository,
     private val userAchievementRepository: UserAchievementRepository,
     private val profileRepository: ProfileRepository,
+    private val applicationEventPublisher: ApplicationEventPublisher,
 ) {
 
     fun checkAndAssignBusyBee(task: Task) {
@@ -42,6 +45,13 @@ class AchievementService(
         )
 
         userAchievementRepository.save(profileAchievement)
+
+        applicationEventPublisher.publishEvent(
+            AchievementUnlockedEvent(
+                profileId = profile.id,
+                achievementNameKey = achievement.nameKey
+            )
+        )
     }
 
     fun checkAllAchievementsForTask(task: Task) {

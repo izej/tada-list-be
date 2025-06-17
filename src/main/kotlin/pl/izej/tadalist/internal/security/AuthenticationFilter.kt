@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets
 class AuthenticationFilter(private val jwtSecret: String) : OncePerRequestFilter() {
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean =
-        request.requestURI.contains("/api/v1/auth")
+        request.requestURI.contains("/api/v1/auth") || request.requestURI.contains("/ws")
 
     override fun doFilterInternal(
         request: HttpServletRequest,

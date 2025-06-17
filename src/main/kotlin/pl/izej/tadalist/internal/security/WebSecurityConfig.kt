@@ -26,6 +26,7 @@ class WebSecurityConfig(@Value("\${security.jwt.secret}") private val jwtSecret:
     fun securityFilterChain(httpSecurity: HttpSecurity): SecurityFilterChain = httpSecurity.cors { }
         .csrf { it.disable() }
         .authorizeHttpRequests { it.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll() }
+        .authorizeHttpRequests { it.requestMatchers("/ws/**").permitAll() }
         .authorizeHttpRequests { it.requestMatchers("/api/v1/**").authenticated() }
         .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         .addFilterBefore(AuthenticationFilter(jwtSecret), BasicAuthenticationFilter::class.java)
